@@ -5,12 +5,11 @@
         <span style="color:#5cd9e8">
           <icon name="align-left"></icon>
         </span>
-        <span class="fs-xl text mx-2">产品销售渠道分析</span>
+        <span class="fs-xl text mx-2">流量包数变化</span>
       </div>
       <div class="d-flex jc-center body-box">
-        <dv-capsule-chart :config="config" style="width: 100%;height:160px" />
-        <!-- ---------------------------------------- -->
         <centreRight2Chart1></centreRight2Chart1>
+        <centerRight2Chart2></centerRight2Chart2>
       </div>
     </div>
   </div>
@@ -18,7 +17,7 @@
 
 <script>
 import centreRight2Chart1 from "@/components/echart/centreRight2/centreRight2Chart1";
-
+import centerRight2Chart2 from "../components/echart/centreRight2/centerRight2Chart2.vue";
 export default {
   data() {
     return {
@@ -48,7 +47,7 @@ export default {
       }
     };
   },
-  components: { centreRight2Chart1 },
+  components: { centreRight2Chart1,centerRight2Chart2},
   mounted() {},
   methods: {}
 };
@@ -71,7 +70,6 @@ export default {
   .body-box {
     flex-direction: column;
     border-radius: 10px;
-    overflow: hidden;
   }
 }
 </style>

@@ -74,11 +74,7 @@
             <div>
               <centreRight2 />
             </div>
-            <div>
-              <dv-border-box-13>
-                <centreRight1 />
-              </dv-border-box-13>
-            </div>
+            
           </div>
 
           <!-- 第四行数据 -->
@@ -99,7 +95,6 @@
 <script>
 import centreLeft1 from "./centreLeft1";
 import centreLeft2 from "./centreLeft2";
-import centreRight1 from "./centreRight1";
 import centreRight2 from "./centreRight2";
 import center from "./center";
 import bottomLeft from "./bottomLeft";
@@ -113,7 +108,6 @@ export default {
   components: {
     centreLeft1,
     centreLeft2,
-    centreRight1,
     centreRight2,
     center,
     bottomLeft,

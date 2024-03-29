@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="centerChart2" style="width:120px;height:100px;"></div>
+  <div style="height: 100%;">
+    <div id="centerChart2" style="height:230px;width: 289px;padding-left: 5%;"></div>
   </div>
 </template>
 
@@ -17,47 +17,40 @@ export default {
     drawPie() {
       // 基于准备好的dom，初始化echarts实例
       let myChartPieLeft = echarts.init(
-        document.getElementById("centerChart2")
-      );
+        document.getElementById("centerChart2"),null,{width:"270px",height:"170px"})
+      ;
       //  ----------------------------------------------------------------
-      let tips = 40;
+      
       let option = {
-        title: [
-          {
-            text: tips * 1 + "%",
-            x: "center",
-            y: "center",
-            textStyle: {
-              color: "#67e0e3",
-              fontSize: 16
-            }
-          }
-        ],
+        tooltip: {
+          trigger: 'item'
+        },
         series: [
           {
             type: "pie",
-            radius: ["75%", "80%"],
-            center: ["50%", "50%"],
-            hoverAnimation: false,
-            color: ["#f3ffb070", "transparent"],
+            hoverAnimation: true,
+            color: ["#00bcd44a","#00bcd4","#ff9800","#ff98004a"],
             label: {
               normal: {
-                show: false
+                show: true
               }
             },
             data: [
-              {
-                value: tips,
-                itemStyle: {
-                  normal: {
-                    color: "#ff9800",
-                    shadowBlur: 10,
-                    shadowColor: "#97e2f5"
-                  }
-                }
+            {
+                value: 30000,
+                name:"HTTP\n"
               },
               {
-                value: 100 - tips
+                value: 20000,
+                name:"TCP\n"
+              },
+              {
+                value: 10000,
+                name:"UDP\n"
+              },
+              {
+                value: 5000,
+                name:"DNS\n"
               }
             ]
           }

@@ -18,15 +18,12 @@
       </div> -->
       <div class="percent">
         <div class="item  bg-color-black">
-          <span>今日任务通过率</span>
+          <span>应用流量占比</span>
           <centerChart1 />
         </div>
         <div class="item  bg-color-black">
-          <span>今日任务达标率</span>
+          <span>应用包数占比</span>
           <centerChart2 />
-        </div>
-        <div class="water">
-          <dv-water-level-pond :config="water" style="height: 120px" />
         </div>
       </div>
     </div>
@@ -191,11 +188,12 @@ export default {
       flex-wrap: wrap;
       .item {
         width: 50%;
-        height: 120px;
+        height: 100%; 
         span {
           margin-top: 7px;
           display: flex;
           justify-content: center;
+
         }
       }
       .water {

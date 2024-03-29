@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="centreLeft1Chart" style="width:260px; height: 220px;"></div>
+    <div id="centreLeft1Chart" style="width:260px; height: 350px;"></div>
   </div>
 </template>
 
@@ -20,54 +20,76 @@ export default {
         document.getElementById("centreLeft1Chart")
       );
       //  ----------------------------------------------------------------
-
-      myChartPieLeft.setOption({
-        color: [
-          "#37a2da",
-          "#32c5e9",
-          "#9fe6b8",
-          "#ffdb5c",
-          "#ff9f7f",
-          "#fb7293",
-          "#e7bcf3",
-          "#8378ea"
-        ],
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        toolbox: {
-          show: true
-        },
-        calculable: true,
-        legend: {
-          orient: "horizontal",
-          icon: "circle",
-          bottom: 0,
-          x: "center",
-          data: ["rose1", "rose2", "rose3", "rose4", "rose5", "rose6"],
-          textStyle: {
-            color: "#fff"
-          }
-        },
-        series: [
-          {
-            name: "增值电信业务统计表",
-            type: "pie",
-            radius: [10, 60],
-            roseType: "area",
-            center: ["50%", "40%"],
-            data: [
-              { value: 10, name: "rose1" },
-              { value: 5, name: "rose2" },
-              { value: 15, name: "rose3" },
-              { value: 25, name: "rose4" },
-              { value: 20, name: "rose5" },
-              { value: 35, name: "rose6" }
-            ]
-          }
-        ]
-      });
+     let option = {
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
+      },
+  series: {
+    type: 'sankey',
+    layout: 'none',
+    emphasis: {
+      focus: 'adjacency'
+    },
+    label: {
+      show: true,
+      color: '#fff'
+    },
+    data: [
+      {
+        name: '10.123.123.23'
+      },
+      {
+        name: '10.123.123.25'
+      },
+      {
+        name: '10.123.123.24'
+      },
+      {
+        name: 'DNS'
+      },
+      {
+        name: 'HTTP'
+      },
+      {
+        name: '10.123.123.28'
+      }
+    ],
+    links: [
+      {
+        source: '10.123.123.23',
+        target: 'HTTP',
+        value: 5
+      },
+      {
+        source: '10.123.123.25',
+        target: 'HTTP',
+        value: 3
+      },
+      {
+        source: '10.123.123.23',
+        target: 'DNS',
+        value: 8
+      },
+      {
+        source: '10.123.123.23',
+        target: '10.123.123.24',
+        value: 3
+      },
+      {
+        source: 'HTTP',
+        target: '10.123.123.24',
+        value: 1
+      },
+      {
+        source: 'b1',
+        target: 'c',
+        value: 2
+      }
+    ]
+  }
+};
+      myChartPieLeft.setOption(option);
       // -----------------------------------------------------------------
       // 响应式变化
       window.addEventListener("resize", () => myChartPieLeft.resize(), false);

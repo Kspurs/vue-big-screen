@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="centreLeft2Chart" style="width:330px; height: 370px;"></div>
+    <div id="centreLeft2Chart" style="width:500px; height: 370px;"></div>
   </div>
 </template>
 
@@ -20,174 +20,83 @@ export default {
         document.getElementById("centreLeft2Chart")
       );
       //  ----------------------------------------------------------------
+      // There should not be negative values in rawData
+const rawData = [
+  [100, 302, 301, 334, 390, 330, 320],
+  [320, 132, 101, 134, 90, 230, 210],
+  [220, 182, 191, 234, 290, 330, 310],
+  [150, 212, 201, 154, 190, 330, 410],
+  [820, 832, 901, 934, 1290, 1330, 1320]
+];
+const totalData = [];
+for (let i = 0; i < rawData[0].length; ++i) {
+  let sum = 0;
+  for (let j = 0; j < rawData.length; ++j) {
+    sum += rawData[j][i];
+  }
+  totalData.push(sum);
+}
+const grid = {
+  left: 100,
+  right: 100,
+  top: 50,
+  bottom: 50
+};
+const series = [
+  'HTTP',
+  'TCP',
+  'DNS',
+  'FTP',
+  'UDP'
+].map((name, sid) => {
+  return {
+    name,
+    type: 'bar',
+    stack: 'total',
+    barWidth: '60%',
+    label: {
+      show: false,
+    },
+    data: rawData[sid].map((d, did) =>
+      totalData[did] <= 0 ? 0 : d 
+    )
+  };
+});
+let  option = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  legend: {
+    selectedMode: false,
+    textStyle: {
+      color: "rgba(255,255,255,.8)",
+      fontSize: 12
+    },
+  },
+  grid,
+  yAxis: {
+    type: 'value',
+    axisLabel: {
+      color: "rgba(255,255,255,.8)",
+      fontSize: 12
+    }
+  },
+  xAxis: {
+    axisLabel: {
+      show:false,
+      color: "rgba(255,255,255,.8)",
+      fontSize: 12
+    },
+    type: 'category',
+    data: ['10.12.3.1-10.3.45.5', '10.12.3.1-10.3.45.5', '10.12.3.1-10.3.45.5', '10.12.3.1-10.3.45.5', '10.12.3.1-10.3.45.5', '10.12.3.1-10.3.45.5', '10.12.3.1-10.3.45.5']
+  },
+  series
+};
 
-      let option = {
-        angleAxis: {
-          interval: 1,
-          type: "category",
-          data: [
-            "there1",
-            "there2",
-            "there3",
-            "there4",
-            "there5",
-            "there6",
-            "there7",
-            "there8",
-            "there9",
-            "there10 "
-          ],
-          z: 10,
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: "#00c7ff",
-              width: 1,
-              type: "solid"
-            }
-          },
-          axisLabel: {
-            interval: 0,
-            show: true,
-            color: "#00c7ff",
-            margin: 8,
-            fontSize: 12
-          }
-        },
-        radiusAxis: {
-          min: 0,
-          max: 100,
-          interval: 20,
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: "#00c7ff",
-              width: 1,
-              type: "solid"
-            }
-          },
-          axisLabel: {
-            formatter: "{value} %",
-            show: false,
-            padding: [0, 0, 20, 0],
-            color: "#00c7ff",
-            fontSize: 16
-          },
-          splitLine: {
-            lineStyle: {
-              color: "#00c7ff",
-              width: 1,
-              type: "solid"
-            }
-          }
-        },
-        legend: {
-          show: true,
-          orient: "vartical",
-          top: "center",
-          bottom: "0%",
-          itemWidth: 16,
-          itemHeight: 8,
-          itemGap: 16,
-          textStyle: {
-            color: "#A3E2F4",
-            fontSize: 12,
-            fontWeight: 0
-          },
-          data: ["A"]
-        },
-        polar: {},
-        series: [
-          {
-            name: "A",
-            type: "bar",
-            radius: ["20%", "100%"],
-            data: [
-              {
-                value: 87,
-                itemStyle: {
-                  normal: {
-                    color: "#f54d4d"
-                  }
-                }
-              },
-              {
-                value: 80,
-                itemStyle: {
-                  normal: {
-                    color: "#f87544"
-                  }
-                }
-              },
-              {
-                value: 75,
-                itemStyle: {
-                  normal: {
-                    color: "#ffae00"
-                  }
-                }
-              },
-              {
-                value: 69,
-                itemStyle: {
-                  normal: {
-                    color: "#dcff00"
-                  }
-                }
-              },
-              {
-                value: 63,
-                itemStyle: {
-                  normal: {
-                    color: "#25d053"
-                  }
-                }
-              },
-              {
-                value: 54,
-                itemStyle: {
-                  normal: {
-                    color: "#01fff5"
-                  }
-                }
-              },
-              {
-                value: 47,
-                itemStyle: {
-                  normal: {
-                    color: "#007cff"
-                  }
-                }
-              },
-              {
-                value: 40,
-                itemStyle: {
-                  normal: {
-                    color: "#4245ff"
-                  }
-                }
-              },
-              {
-                value: 35,
-                itemStyle: {
-                  normal: {
-                    color: "#c32eff"
-                  }
-                }
-              },
-              {
-                value: 33,
-                itemStyle: {
-                  normal: {
-                    color: "#ff62e8"
-                  }
-                }
-              }
-            ],
-            coordinateSystem: "polar"
-          }
-        ]
-      };
+    
       myChartPieLeft.setOption(option);
       // -----------------------------------------------------------------
       // 响应式变化
